@@ -19,11 +19,12 @@ namespace DeponencyAnalyzer.Engine.DTOs
         public NodeType nodeType { set; get; }
 
         public List<DependencyType> dependencyType { set; get; }
-        public Node(int id, string label,List<DependencyType> dependencyType, NodeType nodeType)
+        public Node(int id, string label,List<DependencyType> dependencyType, NodeType nodeType,bool hasHiddenChildern)
         {
             this.label = label;
-           
+
             this.id = id;
+                this.size = 50;
             this.value = 5;
             this.group = "";
             this.dependencyType = dependencyType;
@@ -44,8 +45,11 @@ namespace DeponencyAnalyzer.Engine.DTOs
                 this.shape = "box";
                 this.color = "#9fbfdf";
             }
-            var dependencyTypes = 
-            this.htmlContent = $@"<div class='card'><div class=subCat>Node Type:{nodeType}</div><div class=subCat>Dependency Type to parent node : {String.Join(",", dependencyType)}</div></div>";
+
+            if (hasHiddenChildern)
+                this.color = "#ff8080";
+            //var dependencyTypes = 
+            //this.htmlContent = $@"<div class='card'><div class=subCat>Node Type:{nodeType}</div><div class=subCat>Dependency Type to parent node : {String.Join(",", dependencyType)}</div></div>";
         }
     }
 }

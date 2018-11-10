@@ -26,6 +26,10 @@ namespace DeponencyAnalyzer.Engine.DTOs
 
         public List<GraphNode> Childrens { set; get; }
 
+        public bool CircleDependency { set; get; }
+
+        public bool HasHiddenChildren { set; get; }
+
      
     
          

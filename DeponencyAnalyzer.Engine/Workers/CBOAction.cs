@@ -1,6 +1,7 @@
 ﻿
 using DeponencyAnalyzer.Engine.DTOs;
 using DeponencyAnalyzer.Engine.Interfaces;
+using DeponencyAnalyzer.Engine.Workers;
 using Mono.Cecil;
 using Newtonsoft.Json;
 using System;
@@ -13,13 +14,14 @@ namespace CallGraphAnalyzer.Engine.Workers
 {
     public class CBOAction : IActions<TypeDefinitionExtension, ModuleDefinition>
     {
-        private FileActions fileaction;
+        private IFileActions fileaction;
         private HtmlReport report;
-
+        private IHistory<string> history;
         public CBOAction ()
         {
             fileaction = new FileActions();
             report = new HtmlReport();
+            history = new FileHistory();
         }
         public List<TypeDefinitionExtension> BuildTypes(ModuleDefinition moduleDefinition)
         {
@@ -73,8 +75,10 @@ namespace CallGraphAnalyzer.Engine.Workers
                                 {
                                     GraphNode childNode = new GraphNode();
                                     childNode.Name = field.Name;
-                                    childNode.nodeType = field.Type;
+                                    if (field.fieldDefinition.DeclaringType.MetadataType == MetadataType.Class)
+                                        childNode.nodeType = NodeType.Class;
                                     childNode.dependencyType = new List<DependencyType>();
+                                  
                                     childNode.dependencyType.Add(DependencyType.ClassAttribute);
                                     cbo.Childrens.Add(childNode);
                                 }
@@ -90,14 +94,14 @@ namespace CallGraphAnalyzer.Engine.Workers
                             var returnType = method.GetReturnType(cbo.Namespace);
                             if (returnType != null)
                             {
-                                if (returnType.typeReference.Name != cbo.Name)
+                                if (returnType.Name != cbo.Name)
                                 {
-                                    var exist = cbo.Childrens.Where(x => x.Name == returnType.typeReference.Name).FirstOrDefault();
+                                    var exist = cbo.Childrens.Where(x => x.Name == returnType.Name).FirstOrDefault();
                                     if (exist == null)
                                     {
                                         GraphNode childNode = new GraphNode();
                                         if (returnType.IsList)
-                                            childNode.Name = returnType.ListTypeName;
+                                            childNode.Name = returnType.Name;
                                         else childNode.Name = returnType.typeReference.Name;
 
                                         childNode.nodeType = NodeType.Class;
@@ -112,15 +116,15 @@ namespace CallGraphAnalyzer.Engine.Workers
                             var funcationParameters = method.GetFuncationParameters(cbo.Namespace);
                             foreach (var parameter in funcationParameters)
                             {
-                                if (parameter.parameterDefinition.ParameterType.Name != cbo.Name)
+                                if (parameter.Name != cbo.Name)
                                 {
-                                    var exist = cbo.Childrens.Where(x => x.Name == parameter.parameterDefinition.ParameterType.Name).FirstOrDefault();
+                                    var exist = cbo.Childrens.Where(x => x.Name == parameter.Name).FirstOrDefault();
                                     if (exist == null)
                                     {
                                         GraphNode childNode = new GraphNode();
                                         if (parameter.IsList)
-                                            childNode.Name = parameter.ListTypeName;
-                                        else childNode.Name = parameter.parameterDefinition.ParameterType.Name;
+                                            childNode.Name = parameter.Name;
+                                        else childNode.Name = parameter.Name;
                                         childNode.nodeType = NodeType.Class;
                                         childNode.dependencyType = new List<DependencyType>();
                                         childNode.dependencyType.Add(DependencyType.FunctionParameter);
@@ -134,14 +138,14 @@ namespace CallGraphAnalyzer.Engine.Workers
                             var funcationAttribute = method.GetFuncationAttributes(cbo.Namespace);
                             foreach (var attribute in funcationAttribute)
                             {
-                                if (attribute.parameterDefinition.ParameterType.Name != cbo.Name)
+                                if (attribute.Name != cbo.Name)
                                 {
-                                    var exist = cbo.Childrens.Where(x => x.Name == attribute.parameterDefinition.ParameterType.Name).FirstOrDefault();
+                                    var exist = cbo.Childrens.Where(x => x.Name == attribute.Name).FirstOrDefault();
                                     if (exist == null)
                                     {
                                         GraphNode childNode = new GraphNode();
                                         if (attribute.IsList)
-                                            childNode.Name = attribute.ListTypeName;
+                                            childNode.Name = attribute.Name;
                                         else childNode.Name = attribute.parameterDefinition.ParameterType.Name;
                                         childNode.Name = attribute.parameterDefinition.ParameterType.Name;
                                         childNode.nodeType = NodeType.Class;
@@ -157,10 +161,12 @@ namespace CallGraphAnalyzer.Engine.Workers
                         graphs.Add(cbo);
                     }
 
-                  
+                    CalculateDependencyIssues(graphs);
                     var data = BuildRootGraph(graphs);
-                  // AddArrows(data); 
-                    report.BuildHTMLReport(AnalyzerType.CBO, data);
+            
+                    
+                  string contant =   report.BuildHTMLReport(AnalyzerType.CBO, data);
+              //    history.Save(contant);
 
                 }
             }
@@ -169,6 +175,29 @@ namespace CallGraphAnalyzer.Engine.Workers
                 throw ex;
             }
 
+        }
+
+        private void CalculateDependencyIssues(List<GraphNode> data)
+        {
+
+            //if absract class is should include only metheds 
+            //If it include prop error 
+           foreach(var root in data)
+           {
+               if(root.Childrens.Count > 0)
+               {
+                   foreach(var child in root.Childrens)
+                   {
+                       var childrens = data.Where(x => x.Name == child.Name).FirstOrDefault();
+                       if (childrens != null && childrens.Childrens.Count > 0)
+                       {
+                           child.HasHiddenChildren = true;
+                           child.Childrens.AddRange(childrens.Childrens);
+                       }
+                       else child.HasHiddenChildren = false;
+                   }
+               }
+           }
         }
 
         private void AddArrows(List<BaseGraphType> data)
@@ -196,7 +225,7 @@ namespace CallGraphAnalyzer.Engine.Workers
             List<BaseGraphType> graph = new List<BaseGraphType>();
             foreach (var item in nodes)
             {
-                Node node = new Node(id++, item.Name, item.dependencyType, item.nodeType);
+                Node node = new Node(id++, item.Name, item.dependencyType, item.nodeType,false);
                 graph.Add(node);
                 id = ExpandChild(graph, node, item, id);
 
@@ -211,9 +240,15 @@ namespace CallGraphAnalyzer.Engine.Workers
             
             foreach (var child in source.Childrens)
             {
-                Node childNode = new Node(id++, child.Name, child.dependencyType, child.nodeType);
+                Node childNode = new Node(id++, child.Name, child.dependencyType, child.nodeType, child.HasHiddenChildren);
                 if (child.Childrens.Count() > 0)
-                    id =  ExpandChild(graph, childNode, child, id);
+                {
+                    if(child.Childrens.Exists(x=>x.Name == source.Name))
+                    {
+                        Edge circle = new Edge(childNode, childNode, "circular dependency");
+                        graph.Add(circle);
+                    }
+                }
                 Edge edge = new Edge(node, childNode, "");
                 graph.Add(childNode);
                 graph.Add(edge);

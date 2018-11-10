@@ -70,10 +70,12 @@
     <Compile Include="DTOs\TypeReferenceExtension.cs" />
     <Compile Include="Interfaces\IActions.cs" />
     <Compile Include="Interfaces\IFileActions.cs" />
+    <Compile Include="Interfaces\IHistory.cs" />
     <Compile Include="Interfaces\IReportBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Workers\CBOAction.cs" />
     <Compile Include="Workers\FileActions.cs" />
+    <Compile Include="Workers\FileHistory.cs" />
     <Compile Include="Workers\HtmlReport.cs" />
   </ItemGroup>
   <ItemGroup>

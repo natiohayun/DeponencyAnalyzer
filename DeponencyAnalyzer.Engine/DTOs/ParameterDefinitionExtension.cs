@@ -13,13 +13,13 @@ namespace DeponencyAnalyzer.Engine.DTOs
         public ParameterDefinitionExtension ()
         {
             IsList = false;
-            ListTypeName = string.Empty;
+            Name = string.Empty;
         }
         public ParameterDefinition parameterDefinition { set; get; }
 
         public bool IsList { set; get; }
 
-        public string ListTypeName { set; get; }
+        public string Name { set; get; }
 
     }
 }

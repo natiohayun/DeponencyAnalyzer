@@ -14,7 +14,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
         {
             List<MethodDefinitionExtension> methodDefinitionExtensionList = new List<MethodDefinitionExtension>();
             foreach (var method in typeDefinition.Methods)
-                methodDefinitionExtensionList.Add(new MethodDefinitionExtension() { methodDefinition = method });
+                methodDefinitionExtensionList.Add(new MethodDefinitionExtension() { methodDefinition = method, Name = method.Name });
             return methodDefinitionExtensionList;
         }
 
@@ -41,7 +41,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
                             {
                                 var inside = item.Split('.');
                                 if (inside.Count() == 2)
-                                    list.Add(new FieldDefinitionExtension() { fieldDefinition = field,Name = inside[1], Type = type, IsList = true,ListTypeName =inside[1] });
+                                    list.Add(new FieldDefinitionExtension() { fieldDefinition = field,Name = inside[1], Type = type, IsList = true });
                            }
                         }
                     }

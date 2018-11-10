@@ -12,6 +12,11 @@ namespace DeponencyAnalyzer.Engine.DTOs
         public string color { set; get; }
 
         public string title { set; get; }
+        public int size { set; get; }
+
+        
+
+       
 
 
     }

@@ -13,7 +13,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
         public FieldDefinitionExtension()
         {
             IsList = false;
-            ListTypeName = string.Empty;
+            Name = string.Empty;
         }
        public FieldDefinition fieldDefinition { set; get; }
 
@@ -22,6 +22,6 @@ namespace DeponencyAnalyzer.Engine.DTOs
 
         public bool IsList { set; get; }
 
-        public string ListTypeName { set; get; }
+        
     }
 }

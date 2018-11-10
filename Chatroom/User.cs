@@ -12,6 +12,7 @@ namespace Chatroom
 
         public History history;
 
+     
         public Chatroom chatroom;
 
         public User(Chatroom chatroom)

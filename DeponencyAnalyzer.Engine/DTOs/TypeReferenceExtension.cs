@@ -12,12 +12,12 @@ namespace CDeponencyAnalyzer.Engine.DTOs
         public TypeReferenceExtension ()
         {
             IsList = false;
-            ListTypeName = string.Empty;
+            Name = string.Empty;
         }
        public TypeReference typeReference { set; get; }
 
         public bool IsList { set; get; }
 
-        public string ListTypeName { set; get; }
+        public string Name { set; get; }
     }
 }

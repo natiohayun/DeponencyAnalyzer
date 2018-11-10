@@ -11,6 +11,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
    public class MethodDefinitionExtension
     {
         public MethodDefinition methodDefinition { set; get; }
+        public string Name { set; get; }
 
         public List<ParameterDefinitionExtension> GetFuncationParameters(string projectNamespace)
         {
@@ -18,7 +19,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
             foreach(var parameter in methodDefinition.Parameters)
             {
                 if(parameter.ParameterType.Namespace == projectNamespace)
-                    parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = false });
+                    parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = false ,Name = parameter.ParameterType.Name});
                 else if (parameter.ParameterType.Namespace.ToString()== "System.Collections.Generic")
                 {
                     if(parameter.ParameterType.FullName.Contains(projectNamespace))
@@ -30,7 +31,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
                             {
                                 var inside = item.Split('.');
                                 if(inside.Count()==2)
-                                    parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = true, ListTypeName= inside[1] });
+                                    parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = true, Name= inside[1] });
                             }
                         }
                     }
@@ -44,7 +45,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
         public TypeReferenceExtension GetReturnType(string projectNamespace)
         {
             if (methodDefinition.ReturnType.Namespace == projectNamespace)
-                return new TypeReferenceExtension() { typeReference = methodDefinition.ReturnType, IsList = false };
+                return new TypeReferenceExtension() { typeReference = methodDefinition.ReturnType, IsList = false,Name = methodDefinition.Name };
             else if (methodDefinition.ReturnType.Namespace.ToString()== "System.Collections.Generic")
             {
                 if (methodDefinition.ReturnType.FullName.Contains(projectNamespace))
@@ -56,7 +57,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
                         {
                             var inside = item.Split('.');
                             if (inside.Count() == 2)
-                                return new TypeReferenceExtension() { typeReference = methodDefinition.ReturnType, IsList = true, ListTypeName = inside[1] } ;
+                                return new TypeReferenceExtension() { typeReference = methodDefinition.ReturnType, IsList = true, Name = inside[1] } ;
                         }
                     }
                 }
@@ -73,7 +74,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
                 foreach (var parameter in methodDefinition.Parameters)
                 {
                     if (parameter.ParameterType.Namespace == projectNamespace)
-                        parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = false });
+                        parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = false, Name = parameter.Name });
                     else if (parameter.ParameterType.Namespace.ToString() == "System.Collections.Generic")
                     {
                         if (parameter.ParameterType.FullName.Contains(projectNamespace))
@@ -85,7 +86,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
                                 {
                                     var inside = item.Split('.');
                                     if (inside.Count() == 2)
-                                        parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = true, ListTypeName = inside[1] });
+                                        parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = true, Name = inside[1] });
                                 }
                             }
                         }
