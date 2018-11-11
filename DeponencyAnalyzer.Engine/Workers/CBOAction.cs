@@ -200,24 +200,7 @@ namespace CallGraphAnalyzer.Engine.Workers
            }
         }
 
-        private void AddArrows(List<BaseGraphType> data)
-        {
-            List<Edge> edges = new List<Edge>();
      
-            foreach (var i in data)
-            {
-                if (i.GetType() == typeof(Node))
-                {
-                    var f = data.FirstOrDefault(x => x.label == i.label);
-                    if (f != null)
-                    {
-                        Edge e = new Edge(i as Node, f as Node, "");
-                        edges.Add(e);
-                    }
-                }
-            }
-            data.AddRange(edges);
-        }
 
         public List<BaseGraphType> BuildRootGraph(List<GraphNode> nodes)
         {
@@ -225,7 +208,7 @@ namespace CallGraphAnalyzer.Engine.Workers
             List<BaseGraphType> graph = new List<BaseGraphType>();
             foreach (var item in nodes)
             {
-                Node node = new Node(id++, item.Name, item.dependencyType, item.nodeType,false);
+                Node node = new Node(id++, item.Name, item.dependencyType, item.nodeType,Roles.Root,false);
                 graph.Add(node);
                 id = ExpandChild(graph, node, item, id);
 
@@ -240,16 +223,16 @@ namespace CallGraphAnalyzer.Engine.Workers
             
             foreach (var child in source.Childrens)
             {
-                Node childNode = new Node(id++, child.Name, child.dependencyType, child.nodeType, child.HasHiddenChildren);
+                Node childNode = new Node(id++, child.Name, child.dependencyType, child.nodeType, Roles.Child ,child.HasHiddenChildren);
                 if (child.Childrens.Count() > 0)
                 {
                     if(child.Childrens.Exists(x=>x.Name == source.Name))
                     {
-                        Edge circle = new Edge(childNode, childNode, "circular dependency");
+                       Edge circle = new Edge(id++ ,childNode, childNode, true);
                         graph.Add(circle);
                     }
                 }
-                Edge edge = new Edge(node, childNode, "");
+                Edge edge = new Edge(id++,node, childNode,false);
                 graph.Add(childNode);
                 graph.Add(edge);
                

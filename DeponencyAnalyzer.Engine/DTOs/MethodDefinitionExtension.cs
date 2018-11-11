@@ -74,7 +74,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
                 foreach (var parameter in methodDefinition.Parameters)
                 {
                     if (parameter.ParameterType.Namespace == projectNamespace)
-                        parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = false, Name = parameter.Name });
+                        parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = false, Name = parameter.ParameterType.Name });
                     else if (parameter.ParameterType.Namespace.ToString() == "System.Collections.Generic")
                     {
                         if (parameter.ParameterType.FullName.Contains(projectNamespace))

@@ -18,4 +18,8 @@ namespace DeponencyAnalyzer.Engine.DTOs
     [Serializable]
     [JsonConverter(typeof(StringEnumConverter))]
     public enum DependencyType { FunctionParameter = 0, ClassAttribute = 1, FunctionAttribute = 2, FunctionReturnValue = 3 }
+
+    [Serializable]
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum Roles { Root = 0, Child = 1 }
 }

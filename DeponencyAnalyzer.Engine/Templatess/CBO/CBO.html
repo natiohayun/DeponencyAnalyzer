@@ -27,56 +27,70 @@
             autoResize: true,
             height: '100%',
             width: '100%',
-            interaction: {
-                dragView: false
-            },
             layout: {
                 randomSeed: undefined,
                 improvedLayout: true,
                 hierarchical: {
                     direction: "UD",
                     sortMethod: "directed"
+                  
                 }
             },
+            groups: {
+                Class: {
+                    color: { background: '#9fbfdf' },
+                    borderWidth: 3,
+                    shape :'box'
+                 },
+                AbstractClass:
+                {
+                    color: { background: '#d9e6f2' },
+                    borderWidth: 3,
+                    shape :'square'
+                },
+                Interface:
+                {
+                    color: { background: '#ffeecc' },
+                    borderWidth: 3,
+                    shape :'circle'
+                }
+            },
+            interaction: {
+                dragView: false
+            },
+         
             edges: {
                 arrows: 'to',
-                dashes: true,
-                color: {
-               
-                    highlight: '#848484',
-                    hover: '#848484',
-                    opacity: 1.0
-                },
+                smooth: true,
                 font: {
                     size: 14,
                     multi: true
                 },
+             
                 shadow: true,
-              
+
             },
             nodes: {
-
                 shape: 'box',
-                size: 50,
+                font: {
+                    size: 14,
+                    multi: true
+                },
                 fixed: {
                     y: true,
                     x: true
                 },
-                 font: {
-                    size: 14,
-                    multi: true
+                widthConstraint: {
+                    minimum: 50
+                },
+                heightConstraint: {
+                    minimum: 25
                 },
             }
         };
 
-    
-        var network = new vis.Network(container, data, options);
-        network.on('click', function (properties) {
-            var ids = properties.nodes;
-            var clickedNodes = nodes.get(ids);
-            document.getElementById('nodeContent').innerHTML = '<h2 class=nodeCard>' + clickedNodes[0].label + ' node information </h2>' + clickedNodes[0].htmlContent;
-            console.log('clicked nodes:', clickedNodes);
-        });
+       var network = new vis.Network(container, data, options);
+     
  
     </script>
     <pre id="nodeContent"></pre>
