@@ -10,19 +10,37 @@
 </head>
 <body>
 
-     <h2 class="pageHad">
+    <h2 class="pageHad">
         CBO
     </h2>
 
     <div class="canvasStyle" id="canvas"></div>
+    <br />
+    <div class="legend"> Legend</div>
 
+    <div>
+        <div class="hiddingChild"></div>
+    </div>
+    <div>
+        <p class="rectangle"></p>
+        <p>When a rectangle has red border that indicate that this class has hiddin dependency</p>
+    </div>
+    <div>
+        <div class="circle"></div>
+    </div>
+    <div>
+        <div class="square"></div>
+    </div>
+    <div>
+        <div class="arrow_box"></div>
+    </div>
     <script type="text/javascript">
         // create a network
         var container = document.getElementById('canvas');
         var nodes = new vis.DataSet($nodes$);
         var edges = new vis.DataSet($edges$);
         var data = { nodes: nodes, edges: edges };
- 
+
         var options = {
             autoResize: true,
             height: '100%',
@@ -33,32 +51,32 @@
                 hierarchical: {
                     direction: "UD",
                     sortMethod: "directed"
-                  
+
                 }
             },
             groups: {
                 Class: {
                     color: { background: '#9fbfdf' },
                     borderWidth: 3,
-                    shape :'box'
-                 },
+                    shape: 'box'
+                },
                 AbstractClass:
                 {
                     color: { background: '#d9e6f2' },
                     borderWidth: 3,
-                    shape :'square'
+                    shape: 'square'
                 },
                 Interface:
                 {
                     color: { background: '#ffeecc' },
                     borderWidth: 3,
-                    shape :'circle'
+                    shape: 'circle'
                 }
             },
             interaction: {
                 dragView: false
             },
-         
+
             edges: {
                 arrows: 'to',
                 smooth: true,
@@ -66,7 +84,7 @@
                     size: 14,
                     multi: true
                 },
-             
+
                 shadow: true,
 
             },
@@ -89,9 +107,9 @@
             }
         };
 
-       var network = new vis.Network(container, data, options);
-     
- 
+        var network = new vis.Network(container, data, options);
+
+
     </script>
     <pre id="nodeContent"></pre>
 

@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8BFFE4DF-17B5-4633-B9C3-00AFEEF14D1F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>DeponencyAnalyzer.Console</RootNamespace>
-    <AssemblyName>DeponencyAnalyzer.Console</AssemblyName>
+    <RootNamespace>DependencyAnalyzer.Console</RootNamespace>
+    <AssemblyName>DependencyAnalyzer.Console</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DeponencyAnalyzer.Engine\DeponencyAnalyzer.Engine.csproj">
+    <ProjectReference Include="..\DeponencyAnalyzer.Engine\DependencyAnalyzer.Engine.csproj">
       <Project>{86012d05-1c4a-4538-b958-3c42d48a9459}</Project>
-      <Name>DeponencyAnalyzer.Engine</Name>
+      <Name>DependencyAnalyzer.Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

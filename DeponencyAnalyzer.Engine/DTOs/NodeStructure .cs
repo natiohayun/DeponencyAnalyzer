@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DeponencyAnalyzer.Engine.DTOs
 {
-    class Class1
+    public class NodeStructure
     {
     }
 }

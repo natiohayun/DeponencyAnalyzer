@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeponencyAnalyzer.Console", "DeponencyAnalyzer.Console\DeponencyAnalyzer.Console.csproj", "{8BFFE4DF-17B5-4633-B9C3-00AFEEF14D1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyAnalyzer.Console", "DeponencyAnalyzer.Console\DependencyAnalyzer.Console.csproj", "{8BFFE4DF-17B5-4633-B9C3-00AFEEF14D1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeponencyAnalyzer.Engine", "DeponencyAnalyzer.Engine\DeponencyAnalyzer.Engine.csproj", "{86012D05-1C4A-4538-B958-3C42D48A9459}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyAnalyzer.Engine", "DeponencyAnalyzer.Engine\DependencyAnalyzer.Engine.csproj", "{86012D05-1C4A-4538-B958-3C42D48A9459}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{FF5CEE96-E668-479E-A928-69A6755497FD}"
 EndProject

@@ -9,7 +9,7 @@ namespace Chatroom
     public class BasicUser : User
     {
 
-        private History hist;
+      //  private History hist;
     
         public BasicUser(string name, Chatroom chatroom)
             : base(chatroom)

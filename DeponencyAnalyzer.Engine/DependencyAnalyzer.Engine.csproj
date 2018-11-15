@@ -57,12 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\BaseGraphType.cs" />
-    <Compile Include="DTOs\Class1.cs" />
     <Compile Include="DTOs\Edge.cs" />
     <Compile Include="DTOs\Enums.cs" />
     <Compile Include="DTOs\FieldDefinitionExtension.cs" />
     <Compile Include="DTOs\GraphChild.cs" />
     <Compile Include="DTOs\GraphNode.cs" />
+    <Compile Include="DTOs\NodeStructure .cs" />
     <Compile Include="DTOs\MethodDefinitionExtension.cs" />
     <Compile Include="DTOs\Node.cs" />
     <Compile Include="DTOs\ParameterDefinitionExtension.cs" />
@@ -95,5 +95,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
