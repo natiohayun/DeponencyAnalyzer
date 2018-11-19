@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chatroom
+namespace Mediator
 {
     class DummyClass
     {
-       
     }
 }

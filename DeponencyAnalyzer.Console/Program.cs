@@ -13,9 +13,9 @@ namespace DeponencyAnalyzer.Console
         static void Main(string[] args)
         {
 
-            var file = @"C:\temp\Chatroom.exe";
+            //var file = @"C:\temp\Chatroom.exe";
 
-
+            var file = @"C:\Temp\Debug\Hotel_Manager";
             var fileAction = new FileActions();
             System.Console.WriteLine("Welcome to Call Graph Analyzer");
             var path = FileMenu();
@@ -40,7 +40,7 @@ namespace DeponencyAnalyzer.Console
         }
         private static string FileMenu()
         {
-            return @"C:\temp\Chatroom.exe";
+            return @"C:\temp\Mediator.exe";
             System.Console.WriteLine("Please select a file to analyze :");
             System.Console.WriteLine("Type EXIT to return:");
             while (true)
