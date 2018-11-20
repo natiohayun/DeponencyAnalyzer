@@ -40,7 +40,7 @@ namespace DeponencyAnalyzer.Console
         }
         private static string FileMenu()
         {
-            return @"C:\temp\Chatroom.exe";
+            return @"C:\temp\Intel.ClientIntelligence.TasksInputs.dll";
             System.Console.WriteLine("Please select a file to analyze :");
             System.Console.WriteLine("Type EXIT to return:");
             while (true)
