@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{FF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatroom", "Chatroom\Chatroom.csproj", "{4987C29D-9465-4357-9BD5-7058FD21CEA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mediator", "Mediator\Mediator.csproj", "{13960EB8-7B14-4F2C-823A-0E3A0FC1B6E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +31,17 @@ Global
 		{4987C29D-9465-4357-9BD5-7058FD21CEA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4987C29D-9465-4357-9BD5-7058FD21CEA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4987C29D-9465-4357-9BD5-7058FD21CEA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13960EB8-7B14-4F2C-823A-0E3A0FC1B6E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13960EB8-7B14-4F2C-823A-0E3A0FC1B6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13960EB8-7B14-4F2C-823A-0E3A0FC1B6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13960EB8-7B14-4F2C-823A-0E3A0FC1B6E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4987C29D-9465-4357-9BD5-7058FD21CEA6} = {FF5CEE96-E668-479E-A928-69A6755497FD}
+		{13960EB8-7B14-4F2C-823A-0E3A0FC1B6E0} = {FF5CEE96-E668-479E-A928-69A6755497FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F7CC366-09D0-44B8-940F-B0A6AC6FE3F7}

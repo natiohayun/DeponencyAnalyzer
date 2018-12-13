@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chatroom
+namespace Mediator
 {
     public class History
     {
@@ -23,9 +23,9 @@ namespace Chatroom
             Console.WriteLine("Send message: " + message);
         }
 
-        public void done ()
+        public void done()
         {
-            
+
         }
     }
 }
