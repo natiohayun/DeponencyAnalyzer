@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chatroom
 {
-    class DummyClass
+   public  class FileSaver
     {
        
     }

@@ -45,7 +45,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
         public TypeReferenceExtension GetReturnType(string projectNamespace)
         {
             if (methodDefinition.ReturnType.Namespace == projectNamespace)
-                return new TypeReferenceExtension() { typeReference = methodDefinition.ReturnType, IsList = false,Name = methodDefinition.Name };
+                return new TypeReferenceExtension() { typeReference = methodDefinition.ReturnType, IsList = false,Name = methodDefinition.ReturnType.Name };
             else if (methodDefinition.ReturnType.Namespace.ToString()== "System.Collections.Generic")
             {
                 if (methodDefinition.ReturnType.FullName.Contains(projectNamespace))

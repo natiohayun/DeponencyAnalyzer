@@ -9,7 +9,7 @@ namespace Chatroom
     public class History
     {
         List<string> messageHistory;
-        DummyClass c;
+        FileSaver c;
         public History()
         {
             messageHistory = new List<string>();

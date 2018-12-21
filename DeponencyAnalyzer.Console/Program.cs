@@ -40,7 +40,7 @@ namespace DeponencyAnalyzer.Console
         }
         private static string FileMenu()
         {
-            return @"C:\temp\Intel.ClientIntelligence.TasksInputs.dll";
+            return @"C:\temp\Telegram.Bot.dll";
             System.Console.WriteLine("Please select a file to analyze :");
             System.Console.WriteLine("Type EXIT to return:");
             while (true)
