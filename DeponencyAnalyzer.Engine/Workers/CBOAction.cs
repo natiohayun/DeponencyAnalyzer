@@ -162,9 +162,9 @@ namespace CallGraphAnalyzer.Engine.Workers
                     }
 
                     CalculateDependencyIssues(graphs);
-                    var data = BuildRootGraph(graphs);
-            
-                 
+                   var data = BuildRootGraph(graphs);
+
+
                   string contant =   report.BuildHTMLReport(AnalyzerType.CBO, data);
               //    history.Save(contant);
 
@@ -177,6 +177,7 @@ namespace CallGraphAnalyzer.Engine.Workers
 
         }
 
+    
         private void CalculateDependencyIssues(List<GraphNode> data)
         {
 

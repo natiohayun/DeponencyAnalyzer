@@ -29,7 +29,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
 
 
                 if (field.FieldType.Namespace == projectNamespace)
-                    list.Add(new FieldDefinitionExtension() { fieldDefinition = field,Name = field.FieldType.Name,Type = type, IsList = false});
+                    list.Add(new FieldDefinitionExtension() { fieldDefinition = field,Name = field.FieldType.GetElementType().Name, Type = type, IsList = false});
                 else if (field.FieldType.Namespace.ToString() == "System.Collections.Generic")
                 {
                     if (field.FieldType.FullName.Contains(projectNamespace))

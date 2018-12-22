@@ -19,7 +19,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
             foreach(var parameter in methodDefinition.Parameters)
             {
                 if(parameter.ParameterType.Namespace == projectNamespace)
-                    parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = false ,Name = parameter.ParameterType.Name});
+                    parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = false ,Name = parameter.ParameterType.GetElementType().Name});
                 else if (parameter.ParameterType.Namespace.ToString()== "System.Collections.Generic")
                 {
                     if(parameter.ParameterType.FullName.Contains(projectNamespace))
@@ -45,7 +45,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
         public TypeReferenceExtension GetReturnType(string projectNamespace)
         {
             if (methodDefinition.ReturnType.Namespace == projectNamespace)
-                return new TypeReferenceExtension() { typeReference = methodDefinition.ReturnType, IsList = false,Name = methodDefinition.ReturnType.Name };
+                return new TypeReferenceExtension() { typeReference = methodDefinition.ReturnType, IsList = false,Name = methodDefinition.ReturnType.GetElementType().Name };
             else if (methodDefinition.ReturnType.Namespace.ToString()== "System.Collections.Generic")
             {
                 if (methodDefinition.ReturnType.FullName.Contains(projectNamespace))
@@ -74,7 +74,7 @@ namespace DeponencyAnalyzer.Engine.DTOs
                 foreach (var parameter in methodDefinition.Parameters)
                 {
                     if (parameter.ParameterType.Namespace == projectNamespace)
-                        parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = false, Name = parameter.ParameterType.Name });
+                        parameterDefinitionList.Add(new ParameterDefinitionExtension() { parameterDefinition = parameter, IsList = false, Name = parameter.ParameterType.GetElementType().Name });
                     else if (parameter.ParameterType.Namespace.ToString() == "System.Collections.Generic")
                     {
                         if (parameter.ParameterType.FullName.Contains(projectNamespace))
